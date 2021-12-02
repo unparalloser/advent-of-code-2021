@@ -1,4 +1,4 @@
-(ns day2
+(ns unparalloser.advent-of-code-2021.day02
   (:require [clojure.java.io :as io]
             [clojure.string :as str]))
 
@@ -18,8 +18,6 @@
 (defn move-1 [ps]
   (apply map + (map act-to-pos ps)))
 
-(println (reduce * (move-1 data))) ; part 1
-
 (defn move-2
   ([moves]
    (move-2 moves 0 [0 0]))
@@ -31,4 +29,6 @@
        :up (recur tail (- aim n) pos)
        :forward (recur tail aim (map + pos [n (* aim n)]))))))
 
-(println (reduce * (move-2 data))) ; part 2
+(defn -main []
+  (println (reduce * (move-1 data)))  ; part 1
+  (println (reduce * (move-2 data)))) ; part 2

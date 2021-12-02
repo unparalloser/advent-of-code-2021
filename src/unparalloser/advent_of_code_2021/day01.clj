@@ -1,4 +1,4 @@
-(ns day1
+(ns unparalloser.advent-of-code-2021.day01
   (:require [clojure.java.io :as io]))
 
 (def data
@@ -18,5 +18,6 @@
 (def sliding-window-sums
   (map (partial reduce +) (partition 3 1 data)))
 
-(println (count-inc data)) ; part 1
-(println (count-inc sliding-window-sums)) ; part 2
+(defn -main []
+  (println (count-inc data))                 ; part 1
+  (println (count-inc sliding-window-sums))) ; part 2
