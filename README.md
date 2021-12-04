@@ -1,7 +1,7 @@
 # Advent of Code 2021
 My solutions to this year's [Advent of Code](https://adventofcode.com/2021).
 
-⭐ 4/50
+⭐ 6/50
 
 ## Run
 
