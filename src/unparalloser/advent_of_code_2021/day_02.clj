@@ -1,9 +1,9 @@
-(ns unparalloser.advent-of-code-2021.day02
+(ns unparalloser.advent-of-code-2021.day-02
   (:require [clojure.java.io :as io]
             [clojure.string :as str]))
 
 (def data
-  (with-open [r (io/reader (io/resource "day2_input.txt"))]
+  (with-open [r (io/reader (io/resource "day_02_input.txt"))]
     (doall
      (for [line (line-seq r)]
        (let [[act n] (str/split line #" ")]
@@ -15,7 +15,7 @@
     :up [0 (- n)]
     :forward [n 0]))
 
-(defn move-1 [ps]
+(defn move [ps]
   (apply map + (map act-to-pos ps)))
 
 (defn move-2
@@ -30,5 +30,5 @@
        :forward (recur tail aim (map + pos [n (* aim n)]))))))
 
 (defn -main []
-  (println (reduce * (move-1 data)))  ; part 1
+  (println (reduce * (move data)))    ; part 1
   (println (reduce * (move-2 data)))) ; part 2

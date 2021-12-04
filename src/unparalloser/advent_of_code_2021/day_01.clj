@@ -1,8 +1,8 @@
-(ns unparalloser.advent-of-code-2021.day01
+(ns unparalloser.advent-of-code-2021.day-01
   (:require [clojure.java.io :as io]))
 
 (def data
-  (with-open [r (io/reader (io/resource "day1_input.txt"))]
+  (with-open [r (io/reader (io/resource "day_01_input.txt"))]
     (mapv #(Integer/parseInt %) (line-seq r))))
 
 (defn count-inc
