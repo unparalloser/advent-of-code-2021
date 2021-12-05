@@ -30,13 +30,10 @@
       (assoc map key val)
       map))
 
-(defn mark-board [board n]
-  (for [row board]
-    (assoc-if-contains row n true)))
-
 (defn mark-boards [boards n]
   (for [board boards]
-    (mark-board board n)))
+    (for [row board]
+    (assoc-if-contains row n true))))
 
 (defn solved? [lines]
   (map (comp (partial every? true?) vals) lines))
