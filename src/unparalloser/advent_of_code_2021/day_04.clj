@@ -33,7 +33,7 @@
 (defn mark-boards [boards n]
   (for [board boards]
     (for [row board]
-    (assoc-if-contains row n true))))
+      (assoc-if-contains row n true))))
 
 (defn solved? [lines]
   (map (comp (partial every? true?) vals) lines))
