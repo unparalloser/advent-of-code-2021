@@ -11,7 +11,7 @@
 (defn bidir-inc-range [n1 n2]
   (if (<= n1 n2)
     (range n1 (inc n2))
-    (reverse (range n2 (inc n1)))))
+    (range n1 (dec n2) -1)))
 
 (defn diagonal? [[x1 y1 x2 y2]]
   (not (or (= x1 x2)
