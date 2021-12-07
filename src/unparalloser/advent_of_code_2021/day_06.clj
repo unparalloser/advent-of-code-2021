@@ -3,27 +3,29 @@
             [clojure.string :as str]))
 
 (def initial-state
-  (frequencies (map #(Integer/parseInt %)
-       (str/split (slurp (io/resource "day_06_input.txt")) #","))))
+  (frequencies
+   (map #(Integer/parseInt %)
+        (str/split (slurp (io/resource "day_06_input.txt")) #","))))
+
+(defn increase [map k v]
+  (update map k (fnil (partial + v) 0)))
 
 (defn simulate-day
   ([map]
    (simulate-day map {}))
   ([[[k v] & map] new-map]
-  (let [new-map (if (zero? k)
-                  (-> new-map
-                      (update 6 (fnil (partial + v) 0))
-                      (update 8 (fnil (partial + v) 0)))
-                  (update new-map (dec k) (fnil (partial + v) 0)))]
-    (if (empty? map)
-      new-map
-      (recur map new-map)))))
+   (let [new-map (if (zero? k)
+                   (-> new-map
+                       (increase 6 v)
+                       (increase 8 v))
+                   (increase new-map (dec k) v))]
+     (if (empty? map)
+       new-map
+       (recur map new-map)))))
 
-(defn simulate-days [coll n]
-  (if (zero? n)
-    coll
-    (recur (simulate-day coll) (dec n))))
+(defn fish-sum [coll n]
+  (reduce + (vals (nth (iterate simulate-day coll) n))))
 
 (defn -main []
-  (println (reduce + (vals (simulate-days initial-state 80))))   ; part 1
-  (println (reduce + (vals (simulate-days initial-state 256))))) ; part 2
+  (println (fish-sum initial-state 80))   ; part 1
+  (println (fish-sum initial-state 256))) ; part 2
